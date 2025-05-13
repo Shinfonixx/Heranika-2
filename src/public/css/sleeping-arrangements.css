@@ -1,0 +1,48 @@
+/* Sleeping Arrangements Styles */
+.sleeping-arrangements {
+    padding: 48px 0;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.sleeping-arrangements h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #222222;
+    margin-bottom: 24px;
+}
+
+.sleeping-card {
+    border: 1px solid #DDDDDD;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.bed-icon {
+    color: #222222;
+    margin-bottom: 16px;
+}
+
+.sleeping-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222222;
+    margin-bottom: 8px;
+}
+
+.sleeping-card p {
+    font-size: 14px;
+    color: #717171;
+    margin-bottom: 4px;
+    line-height: 20px;
+}
+
+@media (max-width: 768px) {
+    .sleeping-arrangements {
+        padding: 32px 0;
+    }
+    
+    .sleeping-card {
+        margin-bottom: 16px;
+    }
+}

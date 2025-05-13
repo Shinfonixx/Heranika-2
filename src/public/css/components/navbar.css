@@ -1,0 +1,98 @@
+/* User Menu Styles */
+.user-menu .nav-link {
+    font-size: 1.5rem;
+    padding: 0.5rem !important;
+    color: var(--primary-color) !important;
+}
+
+.user-menu .dropdown-menu {
+    min-width: 200px;
+    padding: 0.5rem;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    margin-top: 0.5rem;
+}
+
+.user-menu .dropdown-item {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.user-menu .dropdown-item:hover {
+    background-color: rgba(42, 157, 143, 0.1);
+    color: var(--primary-color);
+}
+
+.user-menu .dropdown-item i {
+    width: 20px;
+    text-align: center;
+}
+
+.user-menu .dropdown-item-text {
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.user-menu .dropdown-divider {
+    margin: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+    .user-menu .dropdown-menu {
+        position: static !important;
+        width: 100%;
+        margin-top: 0.5rem;
+        box-shadow: none;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+}
+
+.user-menu .user-name {
+    margin-right: 8px;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .user-menu .user-name {
+        display: none;
+    }
+}
+
+
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: var(--space-md) 0;
+    transition: var(--transition-all);
+}
+
+.navbar-brand {
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.nav-link {
+    font-weight: 500;
+    padding: var(--space-sm) var(--space-md) !important;
+    color: var(--gray-700) !important;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: var(--space-md);
+    right: var(--space-md);
+    height: 2px;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transform: scaleX(0);
+    transition: var(--transition-all);
+}

@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="/css/payment-status.css">
+
+<div class="success-container">
+    <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+    </div>
+    <h2>¡Pago Completado con Éxito!</h2>
+    <p class="lead">Tu reserva ha sido confirmada y procesada correctamente.</p>
+    
+    <div class="booking-details">
+        <h3><i class="fas fa-info-circle"></i> Detalles de tu Reserva</h3>
+        <div class="detail-row">
+            <span><i class="fas fa-calendar-check"></i> Fecha de Entrada:</span>
+            <span id="checkInDate" class="fw-bold"></span>
+        </div>
+        <div class="detail-row">
+            <span><i class="fas fa-calendar-times"></i> Fecha de Salida:</span>
+            <span id="checkOutDate" class="fw-bold"></span>
+        </div>
+        <div class="detail-row">
+            <span><i class="fas fa-users"></i> Huéspedes:</span>
+            <span id="guestsInfo" class="fw-bold"></span>
+        </div>
+        <div class="detail-row">
+            <span>Total Pagado:</span>
+            <span id="totalPaid" class="fw-bold"></span>
+        </div>
+    </div>
+
+    <div class="confirmation-info">
+        <p class="confirmation-email">
+            <i class="fas fa-envelope"></i>
+            Hemos enviado un correo electrónico con todos los detalles de tu reserva.
+        </p>
+        <p class="text-muted">
+            <i class="fas fa-phone"></i>
+            Si tienes alguna pregunta, no dudes en contactarnos al +34 XXX XXX XXX
+        </p>
+    </div>
+
+    <div class="action-buttons">
+        <a href="/" class="btn-home">
+            <i class="fas fa-home"></i> Volver al Inicio
+        </a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const bookingData = JSON.parse(sessionStorage.getItem('bookingData'));
+    if (bookingData) {
+        document.getElementById('checkInDate').textContent = bookingData.checkIn;
+        document.getElementById('checkOutDate').textContent = bookingData.checkOut;
+        document.getElementById('guestsInfo').textContent = 
+            `${bookingData.adults} adultos, ${bookingData.children} niños`;
+        document.getElementById('totalPaid').textContent = bookingData.totalPrice + '€';
+        
+        // Limpiar los datos de la sesión después de mostrarlos
+        sessionStorage.removeItem('bookingData');
+    }
+});
+</script>

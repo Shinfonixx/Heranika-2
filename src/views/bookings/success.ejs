@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+
+<div class="booking-success-container">
+    <div class="success-card">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h1>¡Reserva Confirmada!</h1>
+        <p>Su reserva ha sido procesada exitosamente.</p>
+        <div class="booking-details">
+            <h3>Detalles de la Reserva</h3>
+            <ul>
+                <li><strong>Check-in:</strong> <%= booking.checkIn.toLocaleDateString() %></li>
+                <li><strong>Check-out:</strong> <%= booking.checkOut.toLocaleDateString() %></li>
+                <li><strong>Huéspedes:</strong> <%= booking.guests.adults %> adultos, <%= booking.guests.children %> niños</li>
+                <li><strong>Precio Total:</strong> €<%= booking.totalPrice %></li>
+            </ul>
+        </div>
+        <div class="success-actions">
+            <a href="/" class="btn btn-primary">Volver al Inicio</a>
+            <a href="/reservas" class="btn btn-secondary">Ver Mis Reservas</a>
+        </div>
+    </div>
+</div>

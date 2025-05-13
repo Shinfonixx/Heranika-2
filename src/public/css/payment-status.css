@@ -1,0 +1,76 @@
+.success-container, .error-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    text-align: center;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.success-icon, .error-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.success-icon i {
+    color: #28a745;
+}
+
+.error-icon i {
+    color: #dc3545;
+}
+
+.booking-details {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.confirmation-email {
+    color: #6c757d;
+    margin: 20px 0;
+}
+
+.btn-home, .btn-retry {
+    display: inline-block;
+    padding: 12px 30px;
+    margin: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-home {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-retry {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-home:hover, .btn-retry:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.help-text {
+    margin-top: 20px;
+    color: #6c757d;
+    font-size: 0.9rem;
+}

@@ -1,0 +1,345 @@
+<%- include('../partials/header') %>
+
+<div class="reviews-container">
+    <div class="reviews-header">
+        <div class="header-icon">
+            <i class="fas fa-star"></i>
+        </div>
+        <h2>Opiniones de Nuestros Huéspedes</h2>
+        <p class="lead text-muted">Descubre lo que otros huéspedes dicen sobre su experiencia</p>
+    </div>
+
+    <% if (locals.user) { %>
+        <div class="review-form-container">
+            <div class="card">
+                <div class="card-body">
+                    <h3><i class="fas fa-pencil-alt"></i> Comparte tu Experiencia</h3>
+                    <form id="reviewForm" action="/opiniones" method="POST">
+                        <div class="rating-container mb-4">
+                            <label>Tu Valoración:</label>
+                            <div class="stars">
+                                <% for(let i = 5; i >= 1; i--) { %>
+                                    <input type="radio" id="star<%= i %>" name="rating" value="<%= i %>" required>
+                                    <label for="star<%= i %>"><i class="fas fa-star"></i></label>
+                                <% } %>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="reviewTitle">Título de tu opinión:</label>
+                            <input type="text" class="form-control" id="reviewTitle" name="title" required
+                                placeholder="Resume tu experiencia en una frase">
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="reviewContent">Tu opinión detallada:</label>
+                            <textarea class="form-control" id="reviewContent" name="content" rows="4" required
+                                placeholder="Cuéntanos más sobre tu experiencia..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Publicar Opinión
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="login-prompt text-center my-5">
+            <div class="card">
+                <div class="card-body">
+                    <i class="fas fa-lock mb-3" style="font-size: 2rem; color: var(--primary-color);"></i>
+                    <h3>¿Quieres compartir tu opinión?</h3>
+                    <p class="text-muted">Inicia sesión para compartir tu experiencia con otros huéspedes</p>
+                    <a href="/login" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="reviews-grid">
+        <% if (reviews && reviews.length > 0) { %>
+            <% reviews.forEach(review => { %>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="user-info">
+                            <i class="fas fa-user-circle"></i>
+                            <span class="username"><%= review.user.name %></span>
+                        </div>
+                        <div class="rating">
+                            <% for(let i = 0; i < 5; i++) { %>
+                                <i class="fas fa-star <%= i < review.rating ? 'active' : '' %>"></i>
+                            <% } %>
+                        </div>
+                    </div>
+                    <h4 class="review-title"><%= review.title %></h4>
+                    <p class="review-content"><%= review.content %></p>
+                    <div class="review-footer">
+                        <span class="review-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            <%= new Date(review.createdAt).toLocaleDateString('es-ES', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            }) %>
+                        </span>
+                        
+                        <% if (locals.user && review.user && locals.user.id === review.user.id) { %>
+                            <div class="review-actions">
+                                <button class="btn btn-sm btn-outline-primary edit-review" data-review-id="<%= review._id %>">
+                                    <i class="fas fa-edit"></i> Editar
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger delete-review" data-review-id="<%= review._id %>">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </button>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+
+    <!-- Modal para editar reseña -->
+    <div class="modal fade" id="editReviewModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Reseña</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editReviewForm">
+                        <div class="rating-container mb-4">
+                            <label>Tu Valoración:</label>
+                            <div class="stars">
+                                <% for(let i = 5; i >= 1; i--) { %>
+                                    <input type="radio" id="editStar<%= i %>" name="rating" value="<%= i %>">
+                                    <label for="editStar<%= i %>"><i class="fas fa-star"></i></label>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editTitle" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="editTitle" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editContent" class="form-label">Contenido</label>
+                            <textarea class="form-control" id="editContent" name="content" rows="4" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="saveEditBtn">Guardar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Manejar eliminación de reseñas
+        document.querySelectorAll('.delete-review').forEach(button => {
+            button.addEventListener('click', async function() {
+                if (confirm('¿Estás seguro de que quieres eliminar esta reseña?')) {
+                    const reviewId = this.dataset.reviewId;
+                    try {
+                        const response = await fetch(`/opiniones/${reviewId}`, {
+                            method: 'DELETE'
+                        });
+                        
+                        if (response.ok) {
+                            window.location.reload();
+                        } else {
+                            alert('Error al eliminar la reseña');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Error al eliminar la reseña');
+                    }
+                }
+            });
+        });
+    
+        // Manejar edición de reseñas
+        const editModal = new bootstrap.Modal(document.getElementById('editReviewModal'));
+        let currentReviewId = null;
+    
+        document.querySelectorAll('.edit-review').forEach(button => {
+            button.addEventListener('click', function() {
+                currentReviewId = this.dataset.reviewId;
+                const reviewCard = this.closest('.review-card');
+                
+                // Rellenar el formulario con los datos actuales
+                document.getElementById('editTitle').value = reviewCard.querySelector('.review-title').textContent;
+                document.getElementById('editContent').value = reviewCard.querySelector('.review-content').textContent;
+                
+                // Seleccionar la calificación actual
+                const stars = reviewCard.querySelectorAll('.fa-star.active').length;
+                document.getElementById(`editStar${stars}`).checked = true;
+                
+                editModal.show();
+            });
+        });
+    
+        // Manejar guardado de cambios
+        document.getElementById('saveEditBtn').addEventListener('click', async function() {
+            const formData = new FormData(document.getElementById('editReviewForm'));
+            const data = {
+                title: formData.get('title'),
+                content: formData.get('content'),
+                rating: formData.get('rating')
+            };
+    
+            try {
+                const response = await fetch(`/opiniones/${currentReviewId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert(result.error || 'Error al guardar los cambios');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al guardar los cambios');
+            }
+        });
+    });
+    </script>
+</div>
+
+<style>
+.reviews-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.reviews-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.header-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.review-form-container {
+    max-width: 800px;
+    margin: 0 auto 50px;
+}
+
+.rating-container {
+    text-align: center;
+}
+
+.stars {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: 0.5rem;
+}
+
+.stars input {
+    display: none;
+}
+
+.stars label {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #ddd;
+    transition: all 0.2s ease;
+}
+
+.stars label:hover,
+.stars label:hover ~ label,
+.stars input:checked ~ label {
+    color: #ffd700;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.review-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.rating .fa-star {
+    color: #ddd;
+}
+
+.rating .fa-star.active {
+    color: #ffd700;
+}
+
+.review-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.review-content {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.review-footer {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.login-prompt {
+    max-width: 500px;
+    margin: 40px auto;
+}
+
+@media (max-width: 768px) {
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>

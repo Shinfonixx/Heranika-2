@@ -1,0 +1,116 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<section class="contact-header py-5 text-center">
+    <div class="container">
+        <h1 class="display-4">Contacta con Nosotros</h1>
+        <p class="lead">Estamos aquí para ayudarte con cualquier consulta</p>
+    </div>
+</section>
+
+<section class="contact-info py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Dirección</h3>
+                    <p>Calle Principal 123<br>28001 Madrid, España</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Teléfono</h3>
+                    <p>+34 912 345 678<br>+34 666 777 888</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>info@heranika.com<br>reservas@heranika.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact-form py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="contact-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.67890!2d-3.123456!3d40.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM40zMDA!5e0!3m2!1ses!2ses!4v1234567890" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0; border-radius: 15px;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-card">
+                    <h2 class="mb-4">Envíanos un mensaje</h2>
+                    <form id="contactForm" class="needs-validation" novalidate>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="name" placeholder="Tu nombre" required>
+                            <label for="name">Nombre completo</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email" placeholder="Tu email" required>
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control" id="phone" placeholder="Tu teléfono">
+                            <label for="phone">Teléfono (opcional)</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="subject" required>
+                                <option value="">Selecciona un tema</option>
+                                <option value="reserva">Consulta sobre reservas</option>
+                                <option value="info">Información general</option>
+                                <option value="sugerencia">Sugerencias</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                            <label for="subject">Asunto</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" id="message" style="height: 150px" required></textarea>
+                            <label for="message">Mensaje</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="privacy" required>
+                            <label class="form-check-label" for="privacy">
+                                Acepto la política de privacidad y el tratamiento de mis datos
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    });
+});
+</script>

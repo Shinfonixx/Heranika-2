@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">Heranika</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/reservas">Reservas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/opiniones">Opiniones</a>
+                </li>
+            </ul>
+            
+            <div class="d-flex align-items-center">
+                <% if (locals.user) { %>
+                    <div class="dropdown">
+                        <button class="btn btn-link dropdown-toggle user-dropdown" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="user-info">
+                                <i class="fas fa-user-circle me-2"></i>
+                                <span class="user-name"><%= user.name %></span>
+                            </div>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/reservas/mis-reservas"><i class="fas fa-calendar-alt"></i> Mis Reservas</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="/logout" method="POST" class="dropdown-item-form">
+                                    <button type="submit" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                <% } else { %>
+                    <a href="/login" class="btn btn-outline-primary me-2">Iniciar Sesión</a>
+                    <a href="/register" class="btn btn-primary">Registrarse</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</nav>

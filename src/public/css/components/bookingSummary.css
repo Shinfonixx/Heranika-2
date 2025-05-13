@@ -1,0 +1,38 @@
+.booking-summary {
+    padding: 20px;
+}
+
+.summary-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+.summary-item i {
+    font-size: 24px;
+    margin-right: 15px;
+    color: var(--primary-color);
+}
+
+.summary-item .dates,
+.summary-item .guests,
+.summary-item .price {
+    flex-grow: 1;
+}
+
+.summary-item p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+#confirmBooking {
+    background-color: var(--primary-color);
+    border: none;
+}
+
+#confirmBooking:hover {
+    background-color: var(--primary-color-dark);
+}

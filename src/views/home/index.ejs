@@ -1,0 +1,327 @@
+<section class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <div class="hero-content">
+                    <h1 class="display-2 mb-4 animate__animated animate__fadeInDown">Descubre Heranika</h1>
+                    <p class="lead mb-5 animate__animated animate__fadeInUp">Tu escape perfecto en 4500m² de naturaleza, tranquilidad y diversión</p>
+                    <div class="hero-cta animate__animated animate__fadeInUp">
+                        <a href="/reservas" class="btn btn-primary btn-lg me-3 hover-effect reservation-btn">
+                            <i class="fas fa-calendar-alt me-2"></i>Reservar ahora
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-overlay"></div>
+</section>
+
+<section class="about-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Descubre Heranika</h2>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <p class="lead">Una finca con amplios espacios abiertos para disfrutar y relajarse tanto niños como mayores.</p>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-wifi"></i>
+                        <span>WiFi gratuito</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-snowflake"></i>
+                        <span>Aire acondicionado</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-car"></i>
+                        <span>Amplio aparcamiento</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-swimming-pool"></i>
+                        <span>Piscina privada con vestuario</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-futbol"></i>
+                        <span>Zona de juegos infantil</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-seedling"></i>
+                        <span>Huerto ecológico</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="location-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 animate__animated animate__fadeInUp">Ubicación Privilegiada</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="location-card animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+                    <div class="location-icon">
+                        <i class="fas fa-umbrella-beach"></i>
+                    </div>
+                    <h4>Playas de Cartagena</h4>
+                    <p>A 20 minutos de las maravillosas playas de la costa</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="location-card">
+                    <i class="fas fa-flag-checkered"></i>
+                    <h4>Circuito de Velocidad</h4>
+                    <p>A 5 minutos del circuito de velocidad de Cartagena</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="location-card">
+                    <i class="fas fa-bread-slice"></i>
+                    <h4>Panadería Tradicional</h4>
+                    <p>A 600 metros de una panadería con horno de leña</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3701.8284655378056!2d-1.0542828235898984!3d37.65170487201664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd636951c3d4f431%3A0xcda46a6295fa5780!2sHERANIKA!5e1!3m2!1ses!2ses!4v1747122791163!5m2!1ses!2ses"
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="rounded-3 shadow-lg">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="gallery-section py-5">
+    <div class="container-fluid px-0">
+        <div class="gallery-header text-center mb-5">
+            <h2>Explora Nuestra Casa Rural</h2>
+            <p class="lead">Descubre cada rincón de Heranika a través de nuestras imágenes</p>
+        </div>
+        
+        <div id="imageCarousel" class="carousel slide modern-carousel" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <% const images = Array.from({length: 32}, (_, i) => i + 1); %>
+                <% images.forEach((index, i) => { %>
+                    <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                        <div class="carousel-image-container">
+                            <img src="/fotos-campo/<%= index %>.jpg" 
+                                 class="d-block w-100" 
+                                 alt="Imagen de Heranika <%= index %>"
+                                 loading="lazy"
+                                 data-bs-toggle="modal"
+                                 data-bs-target="#imageModal<%= index %>">
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+            
+            <button class="carousel-control-prev modern-control" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next modern-control" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<section class="commitment-section py-5">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="mb-4">Nuestro Compromiso</h2>
+            <p class="lead">El recinto es completamente privado para el disfrute exclusivo de nuestros huéspedes.</p>
+            <p>Queremos compartir nuestra casa con nuestros huéspedes para que la disfruten, y estamos siempre disponibles para ayudarles con cualquier necesidad durante su estancia.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h2>¿Listo para tu escapada?</h2>
+                <p class="lead mb-0">Reserva ahora y disfruta de una experiencia única en Heranika</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <div class="sticky-cta d-md-none">
+                    <a href="/reservas" class="btn btn-primary btn-lg w-100">
+                        <i class="fas fa-calendar-alt me-2"></i>Reservar ahora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="sleeping-arrangements py-5">
+    <div class="container">
+        <h2 class="mb-4">¿Dónde dormirás?</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="sleeping-card">
+                    <div class="bed-icon mb-3">
+                        <i class="fas fa-bed fa-2x"></i>
+                    </div>
+                    <h3>Dormitorio 2</h3>
+                    <p>1 cama de matrimonio</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="sleeping-card">
+                    <div class="bed-icon mb-3">
+                        <i class="fas fa-bed fa-2x"></i>
+                    </div>
+                    <h3>Dormitorio 3</h3>
+                    <p>2 camas individuales</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="sleeping-card">
+                    <div class="bed-icon mb-3">
+                        <i class="fas fa-couch fa-2x"></i>
+                    </div>
+                    <h3>Salón</h3>
+                    <p>1 sofá cama</p>
+                    <p>1 sofá</p>
+                    <p>1 colchón en el suelo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="property-overview py-5">
+    <div class="container">
+        <div class="overview-header mb-5">
+            <h2>Sobre Heranika</h2>
+            <p class="lead">Una finca con amplios espacios abiertos para disfrutar y relajarse</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="main-features mb-4">
+                    <div class="feature-highlight">
+                        <i class="fas fa-expand"></i>
+                        <div class="feature-text">
+                            <h3>4500 metros cuadrados</h3>
+                            <p>Amplio espacio distribuido entre casa, piscina, huerto y zonas de juego</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-spaces">
+                    <h3 class="section-title">Espacios principales</h3>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="space-card">
+                                <i class="fas fa-swimming-pool"></i>
+                                <h4>Zona de Piscina</h4>
+                                <ul>
+                                    <li>Piscina privada</li>
+                                    <li>Vestuario con aseo</li>
+                                    <li>Zona de relax</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="space-card">
+                                <i class="fas fa-futbol"></i>
+                                <h4>Área Recreativa</h4>
+                                <ul>
+                                    <li>Zona de juegos infantil</li>
+                                    <li>Dos porterías pequeñas</li>
+                                    <li>Espacios abiertos</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="space-card">
+                                <i class="fas fa-seedling"></i>
+                                <h4>Huerto Ecológico</h4>
+                                <ul>
+                                    <li>Huerto mantenido</li>
+                                    <li>Experiencia natural</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="space-card">
+                                <i class="fas fa-home"></i>
+                                <h4>Casa Principal</h4>
+                                <ul>
+                                    <li>Cocina equipada</li>
+                                    <li>Salón espacioso</li>
+                                    <li>Aire acondicionado</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-highlights mt-5">
+                    <h3 class="section-title">Ubicación privilegiada</h3>
+                    <div class="location-items">
+                        <div class="location-item">
+                            <i class="fas fa-umbrella-beach"></i>
+                            <p><strong>20 minutos</strong> de las playas de Cartagena</p>
+                        </div>
+                        <div class="location-item">
+                            <i class="fas fa-flag-checkered"></i>
+                            <p><strong>5 minutos</strong> del circuito de velocidad</p>
+                        </div>
+                        <div class="location-item">
+                            <i class="fas fa-bread-slice"></i>
+                            <p><strong>600 metros</strong> de panadería con horno de leña</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="amenities-card">
+                    <h3>Lo que incluye</h3>
+                    <div class="amenities-grid">
+                        <div class="amenity-item">
+                            <i class="fas fa-wifi"></i>
+                            <span>WiFi</span>
+                        </div>
+                        <div class="amenity-item">
+                            <i class="fas fa-snowflake"></i>
+                            <span>Aire acondicionado</span>
+                        </div>
+                        <div class="amenity-item">
+                            <i class="fas fa-car"></i>
+                            <span>Aparcamiento gratuito</span>
+                        </div>
+                        <div class="amenity-item">
+                            <i class="fas fa-tv"></i>
+                            <span>TV</span>
+                        </div>
+                        <div class="amenity-item">
+                            <i class="fas fa-paw"></i>
+                            <span>Admite mascotas</span>
+                        </div>
+                        <div class="amenity-item">
+                            <i class="fas fa-tshirt"></i>
+                            <span>Lavadora</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<link rel="stylesheet" href="/css/gallery.css">

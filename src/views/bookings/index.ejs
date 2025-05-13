@@ -1,0 +1,248 @@
+<div class="booking-container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="booking-form card">
+                <div class="card-body">
+                    <h2>Reserva tu estancia</h2>
+                    <form id="bookingForm">
+                        <div class="mb-4">
+                            <label for="dateRange" class="form-label">
+                                <i class="fas fa-calendar-alt"></i> Selecciona tus fechas
+                            </label>
+                            <input type="text" id="dateRange" class="form-control" placeholder="Selecciona las fechas" required>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="adults" class="form-label">
+                                    <i class="fas fa-user"></i> Adultos
+                                </label>
+                                <input type="number" id="adults" class="form-control" min="1" value="1" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="children" class="form-label">
+                                    <i class="fas fa-child"></i> Niños
+                                </label>
+                                <input type="number" id="children" class="form-control" min="0" value="0">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="booking-summary card">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">Resumen de la Reserva</h3>
+                    <div class="summary-item">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-calendar-check me-2 text-primary"></i>
+                            <span>Entrada:</span>
+                        </div>
+                        <span id="checkInDisplay" class="fw-bold">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-calendar-times me-2 text-primary"></i>
+                            <span>Salida:</span>
+                        </div>
+                        <span id="checkOutDisplay" class="fw-bold">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-moon me-2 text-primary"></i>
+                            <span>Noches:</span>
+                        </div>
+                        <span id="nightsCount" class="fw-bold">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-users me-2 text-primary"></i>
+                            <span>Huéspedes:</span>
+                        </div>
+                        <span id="guestsCount" class="fw-bold">1 adulto, 0 niños</span>
+                    </div>
+                    <hr class="my-4">
+                    <div class="summary-item total bg-light p-3 rounded">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-euro-sign me-2 text-success"></i>
+                            <span class="fs-5">Total:</span>
+                        </div>
+                        <span id="totalPrice" class="fs-4 fw-bold text-success">150€</span>
+                    </div>
+                    <button id="continueButton" class="btn btn-primary w-100 mt-4 py-3" disabled>
+                        <i class="fas fa-arrow-right me-2"></i>
+                        Continuar con la reserva
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Añadir en el head del documento -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+
+<style>
+.booking-container {
+    padding: 2rem 0;
+}
+
+.booking-form {
+    margin-bottom: 2rem;
+}
+
+.booking-summary {
+    position: sticky;
+    top: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.summary-item.total {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 1rem;
+}
+
+.flatpickr-calendar {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.flatpickr-calendar .flatpickr-day.disabled,
+.flatpickr-calendar .flatpickr-day.disabled:hover {
+    background-color: #ffebee !important;
+    color: #ff5252 !important;
+    text-decoration: line-through !important;
+    border-color: transparent !important;
+    cursor: not-allowed !important;
+}
+
+/* Estilos para días deshabilitados */
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover,
+.flatpickr-day.prevMonthDay.flatpickr-disabled,
+.flatpickr-day.nextMonthDay.flatpickr-disabled,
+.flatpickr-day.notAllowed,
+.flatpickr-day.notAllowed.prevMonthDay,
+.flatpickr-day.notAllowed.nextMonthDay {
+    background-color: #ffebee !important;
+    color: #ff5252 !important;
+    text-decoration: line-through !important;
+    border-color: transparent !important;
+    cursor: not-allowed !important;
+    opacity: 1 !important;
+}
+
+/* Efecto hover para días deshabilitados */
+.flatpickr-day.flatpickr-disabled:hover {
+    background-color: #ffe0e0 !important;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const basePrice = 150; // Precio base por noche
+
+    // Función para obtener las fechas no disponibles
+    async function getDisabledDates() {
+        try {
+            const response = await fetch('/reservas/api/disabled-dates');
+            const data = await response.json();
+            return data.disabledDates;
+        } catch (error) {
+            console.error('Error al obtener fechas no disponibles:', error);
+            return [];
+        }
+    }
+
+    // Inicializar el calendario inmediatamente con configuración básica
+    const calendar = flatpickr("#dateRange", {
+        mode: "range",
+        minDate: "today",
+        locale: "es",
+        dateFormat: "d/m/Y",
+        onChange: function(selectedDates) {
+            if (selectedDates.length === 2) {
+                updateBookingSummary(selectedDates[0], selectedDates[1]);
+            }
+        },
+        onDayCreate: function(dObj, dStr, fp, dayElem) {
+            // Personalizar la apariencia de los días deshabilitados
+            if (dayElem.classList.contains('flatpickr-disabled')) {
+                dayElem.style.backgroundColor = '#ffebee';
+                dayElem.style.color = '#ff5252';
+                dayElem.style.textDecoration = 'line-through';
+                dayElem.style.borderColor = 'transparent';
+            }
+        }
+    });
+
+    // Cargar y actualizar las fechas deshabilitadas después
+    getDisabledDates().then(disabledDates => {
+        calendar.set('disable', disabledDates.map(dateStr => new Date(dateStr)));
+        
+        // Actualizar la apariencia de los días deshabilitados
+        calendar.redraw();
+    });
+
+    // Actualizar resumen cuando cambian los huéspedes
+    document.getElementById('adults').addEventListener('change', updateGuestCount);
+    document.getElementById('children').addEventListener('change', updateGuestCount);
+
+    function updateBookingSummary(checkIn, checkOut) {
+        const nights = calculateNights(checkIn, checkOut);
+        const total = nights * basePrice;
+
+        document.getElementById('checkInDisplay').textContent = formatDate(checkIn);
+        document.getElementById('checkOutDisplay').textContent = formatDate(checkOut);
+        document.getElementById('nightsCount').textContent = nights;
+        document.getElementById('totalPrice').textContent = `${total}€`;
+        document.getElementById('continueButton').disabled = false;
+    }
+
+    function calculateNights(checkIn, checkOut) {
+        const diffTime = Math.abs(checkOut - checkIn);
+        return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    }
+
+    function formatDate(date) {
+        return date.toLocaleDateString('es-ES', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+    }
+
+    function updateGuestCount() {
+        const adults = parseInt(document.getElementById('adults').value) || 0;
+        const children = parseInt(document.getElementById('children').value) || 0;
+        document.getElementById('guestsCount').textContent = 
+            `${adults} adulto${adults !== 1 ? 's' : ''}, ${children} niño${children !== 1 ? 's' : ''}`;
+    }
+
+    // Manejar el envío del formulario
+    document.getElementById('continueButton').addEventListener('click', function() {
+        // Aquí añadiremos la lógica para procesar la reserva
+        // Por ahora, solo almacenaremos los datos en sessionStorage
+        const bookingData = {
+            checkIn: document.getElementById('checkInDisplay').textContent,
+            checkOut: document.getElementById('checkOutDisplay').textContent,
+            nights: document.getElementById('nightsCount').textContent,
+            adults: document.getElementById('adults').value,
+            children: document.getElementById('children').value,
+            totalPrice: document.getElementById('totalPrice').textContent
+        };
+        
+        sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
+        window.location.href = '/reservas/summary';
+    });
+});
+</script>

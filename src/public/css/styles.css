@@ -1,0 +1,8101 @@
+/* Sistema de diseño moderno y variables globales */
+:root {
+    --primary-color: #2A9D8F;
+    --secondary-color: #264653;
+    --accent-color: #E9C46A;
+    --text-color: #2C3E50;
+    --light-color: #F8F9FA;
+    --gray-100: #F8F9FA;
+    --gray-200: #E9ECEF;
+    --gray-300: #DEE2E6;
+    --gray-400: #CED4DA;
+    --gray-500: #ADB5BD;
+    --gray-600: #6C757D;
+    --gray-700: #495057;
+    --gray-800: #343A40;
+    --gray-900: #212529;
+    
+    /* Sistema de espaciado más compacto */
+    --space-xs: 0.2rem;
+    --space-sm: 0.4rem;
+    --space-md: 0.8rem;
+    --space-lg: 1.2rem;
+    --space-xl: 1.6rem;
+    --space-2xl: 2rem;
+    --space-3xl: 2.4rem;
+    
+    /* Sistema de tipografía */
+    --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    /* Tamaños de fuente */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    
+    /* Sistema de sombras mejorado */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.16);
+    
+    /* Bordes redondeados */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* Transiciones */
+    --transition-all: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-transform: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-opacity: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Z-index */
+    --z-negative: -1;
+    --z-elevate: 1;
+    --z-sticky: 100;
+    --z-drawer: 200;
+    --z-modal: 300;
+    --z-popover: 400;
+    --z-maximum: 999;
+}
+
+/* Reseteo y estilos base */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: 1.8;
+  color: var(--gray-800);
+  background-color: var(--gray-50);
+  overflow-x: hidden;
+}
+
+/* Header & Navigation Styles */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1030; /* Add this line to ensure navbar stays on top */
+}
+
+.navbar.scrolled {
+    padding: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.brand-text {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+.brand-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 400;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--dark-color) !important;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link i {
+    margin-right: 5px;
+    font-size: 0.9em;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    opacity: 0;
+    transform: scaleX(0);
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.nav-link.btn {
+    padding: 0.5rem 1.5rem !important;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.nav-link.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.3);
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: white;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-top: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .nav-link::after {
+        display: none;
+    }
+    
+    .nav-link.btn {
+        margin: 0.5rem 0 !important;
+    }
+}
+
+.nav-item {
+    position: relative;
+    margin: 0 0.5rem;
+}
+
+.nav-link {
+    color: var(--dark-color) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: -1;
+    border-radius: 5px;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+    height: 100%;
+    opacity: 1;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: white !important;
+    transform: translateY(-2px);
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    position: relative;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.navbar-toggler-icon {
+    background-image: none;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-color);
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler-icon::before {
+    top: 0;
+}
+
+.navbar-toggler-icon::after {
+    bottom: 0;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+    transform: rotate(45deg);
+    top: 50%;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    transform: rotate(-45deg);
+    bottom: 50%;
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: white;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-top: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .nav-item {
+        margin: 0.5rem 0;
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: var(--space-2xl) 0;
+    background-color: var(--gray-50);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    animation: fadeInUp 1.5s ease;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    margin-bottom: var(--space-lg);
+    line-height: 1.2;
+    color: var(--gray-900);
+    letter-spacing: -0.02em;
+}
+
+.hero-content p {
+    font-size: 1.8rem;
+    color: var(--gray-800);
+    margin-bottom: 3rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* Eliminar el efecto geométrico del fondo */
+.hero-section::before {
+    display: none;
+}
+
+/* Cards and Features */
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition: var(--transition-all);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  transition: var(--transition-transform);
+}
+
+.card:hover::before {
+  transform: translateX(100%);
+}
+
+.card, .feature-item, .location-card, .sleeping-card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover, .feature-item:hover, .location-card:hover, .sleeping-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.gradient-overlay {
+    background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+}
+
+.btn-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.hover-effect {
+    transition: all 0.3s ease;
+}
+
+.hover-effect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.animate__animated {
+    animation-duration: 1s;
+}
+
+/* Cards modernas */
+.feature-item {
+    background: white;
+    border-radius: 15px;
+    padding: var(--space-md);
+    margin-bottom: var(--space-sm);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.feature-item i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+    transition: all 0.6s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    text-transform: none;
+    letter-spacing: 0.5px;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(42, 157, 143, 0.4);
+    color: white;
+}
+
+/* Gallery */
+/* Gallery Page Specific Styles */
+.gallery-header {
+    background: none;
+    color: var(--gray-800);
+    padding: 100px 0;
+}
+
+.gallery-filters .btn {
+    transition: all 0.3s ease;
+}
+
+.gallery-filters .btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.gallery-item {
+    transition: all 0.4s ease;
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 20px;
+    transition: all 0.4s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    bottom: 0;
+}
+
+.gallery-item img {
+    transition: all 0.6s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7));
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.gallery-item:hover::before {
+    opacity: 1;
+}
+
+.gallery-item img {
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+    bottom: 0;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    color: white;
+    padding: 4rem 0 2rem;
+}
+
+.social-links a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    margin: 0 10px;
+    font-size: 1.2rem;
+    transition: all 0.4s ease;
+}
+
+.social-links a:hover {
+    background: var(--accent-color);
+    color: var(--dark-color) !important;
+    transform: translateY(-3px) rotate(8deg);
+}
+
+/* Animations */
+/* Optimizar transiciones */
+.card, .btn, .feature-item {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+.map-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.map-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.map-container iframe {
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .map-container iframe {
+        height: 300px;
+    }
+}
+
+/* Mejorar animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+
+    .feature-item, .location-card, .sleeping-card {
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+
+    .container {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+}
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        min-height: 60vh;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+    }
+
+    .row {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+    }
+
+    [class*="col-"] {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--light-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeOut 0.5s ease 2s forwards;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
+/* Services Page Styles */
+.services-header {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/services-header.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+}
+
+.service-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.service-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.service-features {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.service-features li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.service-features i {
+    color: var(--success-color);
+}
+
+.services-cta {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    margin-top: 4rem;
+    border-radius: 15px;
+    padding: 4rem 2rem;
+}
+
+.services-cta .btn-outline-primary {
+    color: white;
+    border-color: white;
+}
+
+.services-cta .btn-outline-primary:hover {
+    background: white;
+    color: var(--primary-color);
+}
+
+/* Booking Page Styles */
+.booking-header {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/booking-header.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+}
+
+.booking-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.booking-summary {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 2rem;
+}
+
+.summary-details {
+    margin-top: 1.5rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    margin-top: 1rem;
+    border-top: 2px solid var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.form-floating {
+    margin-bottom: 1rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(42, 157, 143, 0.25);
+}
+
+.form-check {
+    margin-bottom: 0.5rem;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+@media (max-width: 991px) {
+    .booking-summary {
+        margin-top: 2rem;
+        position: static;
+    }
+}
+
+/* Reviews Page Styles */
+.reviews-header {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/reviews-header.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+}
+
+.stats-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+}
+
+.stats-card h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stars {
+    color: var(--warning-color);
+}
+
+.review-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.review-user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.review-rating {
+    color: var(--warning-color);
+}
+
+.review-photos img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.review-photos img:hover {
+    transform: scale(1.05);
+}
+
+.filters-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.sort-group {
+    min-width: 200px;
+}
+
+.pagination .page-link {
+    color: var(--primary-color);
+    border-radius: 50%;
+    margin: 0 0.25rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .stats-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Contact Page Styles */
+.contact-header {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/contact-header.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+}
+
+.contact-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.contact-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.contact-icon i {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.form-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.contact-map {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    height: 100%;
+    min-height: 450px;
+}
+
+.contact-map iframe {
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 991px) {
+    .contact-map {
+        margin-bottom: 2rem;
+        min-height: 300px;
+    }
+}
+
+/* Auth Pages Styles */
+.auth-section {
+    min-height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/auth-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 3rem 0;
+}
+
+.auth-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: fadeInUp 0.5s ease;
+}
+
+.auth-card h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.auth-card .form-control {
+    border: 2px solid #eee;
+}
+
+.auth-card .form-control:focus {
+    border-color: var(--primary-color);
+}
+
+.auth-card .btn-primary {
+    padding: 12px 0;
+    font-size: 1.1rem;
+}
+
+.auth-card a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.auth-card a:hover {
+    color: var(--secondary-color) !important;
+}
+
+@media (max-width: 768px) {
+    .auth-card {
+        padding: 2rem;
+        margin: 1rem;
+    }
+}
+
+/* Document Signing Page Styles */
+.document-section {
+    padding-top: 100px;
+}
+
+.pdf-viewer-container {
+    background: white;
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    min-height: 600px;
+    overflow: auto;
+}
+
+#pdfViewer canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.document-controls {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.upload-area {
+    border: 2px dashed var(--primary-color);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+    background: rgba(42, 157, 143, 0.1);
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.upload-label i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.signature-pad-container {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+#signaturePad {
+    width: 100%;
+    height: 200px;
+    background: white;
+}
+
+.signature-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+@media (max-width: 991px) {
+    .document-controls {
+        margin-top: 2rem;
+    }
+}
+
+/* Features List */
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.feature-item i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+/* Location Cards */
+.location-card {
+    text-align: center;
+    padding: var(--space-lg);
+    margin-bottom: var(--space-md);
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.location-card:hover {
+    transform: translateY(-5px);
+}
+
+.location-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Commitment Section */
+.commitment-section {
+    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('/images/fotos-campo/exterior2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Rooms Section Styles */
+.room-card {
+    background: white;
+    border-radius: 15px;
+    padding: var(--space-lg);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.room-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.room-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Breakpoints más consistentes */
+@media (max-width: 1200px) {
+    :root {
+        --space-3xl: 3rem;
+        --text-5xl: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-3xl: 2rem;
+        --text-5xl: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+}
+
+/* Eliminar estilos de banner */
+.login-alert {
+    display: none;
+}
+
+.banner {
+    display: none;
+}
+
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.reservation-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover .reservation-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+

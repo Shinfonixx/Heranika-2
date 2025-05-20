@@ -23,7 +23,7 @@ const { setUserLocals } = require('./middleware/auth');
 // Add session middleware before other middleware
 // Connect to MongoDB
 const mongoose = require('mongoose');
-const mongoUrl = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/heranika';
+const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/heranika';
 
 mongoose.connect(mongoUrl, {
     useNewUrlParser: true,

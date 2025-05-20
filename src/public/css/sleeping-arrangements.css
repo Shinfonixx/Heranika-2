@@ -12,10 +12,13 @@
 }
 
 .sleeping-card {
+    background-color: rgba(0, 128, 0, 0.05); /* Verde claro */
     border: 1px solid #DDDDDD;
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 16px;
+    border-radius: 15px; /* Ajustado para que coincida con el resto */
+    padding: 2rem; /* Ajustado para que coincida con el resto */
+    margin-bottom: 2rem; /* Ajustado para que coincida con el resto */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Añadido sombra para consistencia */
+    transition: transform 0.3s ease; /* Añadido transición suave */
 }
 
 .bed-icon {

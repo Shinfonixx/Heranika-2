@@ -2,11 +2,13 @@
 
 <div class="reviews-container">
     <div class="reviews-header">
-        <div class="header-icon">
-            <i class="fas fa-star"></i>
+        <div class="reviews-header-content">
+            <div class="reviews-title-wrapper">
+                <span class="reviews-icon"><i class="fas fa-star"></i></span>
+                <h2>Opiniones de Nuestros Huéspedes</h2>
+            </div>
+            <p class="lead">Descubre lo que otros huéspedes dicen sobre su experiencia en nuestro alojamiento</p>
         </div>
-        <h2>Opiniones de Nuestros Huéspedes</h2>
-        <p class="lead text-muted">Descubre lo que otros huéspedes dicen sobre su experiencia</p>
     </div>
 
     <% if (locals.user) { %>
@@ -218,128 +220,3 @@
     });
     </script>
 </div>
-
-<style>
-.reviews-container {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-
-.reviews-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.header-icon {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.review-form-container {
-    max-width: 800px;
-    margin: 0 auto 50px;
-}
-
-.rating-container {
-    text-align: center;
-}
-
-.stars {
-    display: inline-flex;
-    flex-direction: row-reverse;
-    gap: 0.5rem;
-}
-
-.stars input {
-    display: none;
-}
-
-.stars label {
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: #ddd;
-    transition: all 0.2s ease;
-}
-
-.stars label:hover,
-.stars label:hover ~ label,
-.stars input:checked ~ label {
-    color: #ffd700;
-}
-
-.reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.review-card {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-}
-
-.review-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.review-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.user-info i {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-}
-
-.rating .fa-star {
-    color: #ddd;
-}
-
-.rating .fa-star.active {
-    color: #ffd700;
-}
-
-.review-title {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-}
-
-.review-content {
-    color: #666;
-    margin-bottom: 15px;
-    line-height: 1.6;
-}
-
-.review-footer {
-    font-size: 0.9rem;
-    color: #888;
-}
-
-.login-prompt {
-    max-width: 500px;
-    margin: 40px auto;
-}
-
-@media (max-width: 768px) {
-    .reviews-grid {
-        grid-template-columns: 1fr;
-    }
-}
-</style>

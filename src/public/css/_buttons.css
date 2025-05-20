@@ -1,0 +1,147 @@
+/* Estilos para botones */
+
+/* Botón Glass (asume .btn.btn-glass) */
+.btn-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--light-color);
+    /* Hover específico si es necesario, si no, hereda de .btn */
+}
+
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.2); /* Mantenemos hover específico para glass */
+    color: var(--light-color);
+    /* transform: translateY(-2px); Ya viene de .btn:hover */
+}
+
+/* Botones Generales */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem; /* Considerar var(--space-sm) var(--space-md) */
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-weight: 600; /* semibold */
+    line-height: 1.5;
+    color: var(--text-color); /* Color de texto por defecto */
+    background-color: transparent; /* Fondo por defecto */
+    border: 1px solid transparent; /* Borde por defecto, las variantes lo colorean */
+    transition: var(--transition-all);
+    cursor: pointer;
+    text-transform: none; /* Opcional: capitalize, uppercase */
+    letter-spacing: 0.5px; /* Opcional, revisar con Poppins */
+    text-decoration: none; /* Para asegurar que no haya subrayado si se usa <a> como botón */
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+    transform: translateY(0);
+    filter: brightness(95%);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    box-shadow: var(--shadow-md);
+}
+
+/* Botón Primario */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-color: var(--primary-color); /* El borde toma el color del fondo */
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+    /* transform y box-shadow se heredan de .btn:hover */
+    filter: brightness(90%);
+    color: var(--light-color); /* Asegurar color en hover si brightness lo afecta */
+}
+
+.btn-primary:active {
+    /* transform y box-shadow se heredan de .btn:active */
+    filter: brightness(80%);
+}
+
+/* Botón Secundario */
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    border-color: var(--secondary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+    filter: brightness(90%);
+    color: var(--light-color);
+}
+
+.btn-secondary:active {
+    filter: brightness(80%);
+}
+
+/* Botón de Acento */
+.btn-accent {
+    background-color: var(--accent-color);
+    color: var(--text-color); /* Buen contraste con amarillo/dorado */
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-accent:hover {
+    filter: brightness(90%);
+    color: var(--text-color);
+}
+
+.btn-accent:active {
+    filter: brightness(80%);
+}
+
+/* Botón Outline Primario */
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-color: var(--primary-color);
+}
+
+/* Botón Outline Secundario */
+.btn-outline-secondary {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    background-color: transparent;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    border-color: var(--secondary-color);
+}
+
+/* Tamaños de Botones */
+/* .btn (sin clase de tamaño) actúa como tamaño mediano (md) */
+/* font-size: var(--text-base); padding: 0.75rem 1.5rem; */
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: var(--text-sm);
+}
+
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: var(--text-lg);
+}
+

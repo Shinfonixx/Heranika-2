@@ -1,0 +1,21 @@
+/* Reseteo y estilos base */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: 16px; /* O el tamaño base que prefieras */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans); /* Asegúrate que _variables.css se carga antes */
+  line-height: 1.8; /* O el line-height base que prefieras */
+  color: var(--gray-800); /* Asegúrate que _variables.css se carga antes */
+  background-color: var(--gray-50); /* O el color de fondo que prefieras */
+  overflow-x: hidden;
+}

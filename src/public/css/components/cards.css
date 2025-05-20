@@ -1,8 +1,10 @@
 .feature-card {
-    background: white;
-    border-radius: var(--radius-lg);
-    padding: var(--space-xl);
-    transition: var(--transition-all);
+    background-color: rgba(0, 128, 0, 0.05); /* Verde claro */
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
     border: 1px solid var(--gray-200);
     height: 100%;
 }

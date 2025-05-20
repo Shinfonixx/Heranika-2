@@ -59,12 +59,14 @@ app.use(setUserLocals);
 const paymentRoutes = require('./routes/payment'); // Ruta corregida
 const authRoutes = require('./routes/auth');
 const reviewRoutes = require('./routes/reviews');
+const contactRoutes = require('./routes/contact');
 const indexRoutes = require('./routes/index');
 
 // Rutas específicas primero
 app.use('/reservas', require('./routes/bookings')); // También corregir esta
 app.use('/pagos', paymentRoutes);
 app.use('/opiniones', reviewRoutes);
+app.use('/contact', contactRoutes);
 app.use('/', authRoutes);  // Rutas de autenticación
 app.use('/', indexRoutes); // Rutas principales al final
 

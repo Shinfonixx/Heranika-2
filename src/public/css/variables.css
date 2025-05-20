@@ -1,0 +1,103 @@
+:root {
+    /* From styles.css (prioritized if conflicting) */
+    --primary-color: #2A9D8F;
+    --secondary-color: #264653;
+    --accent-color: #E9C46A;
+    --primary-rgb: 42, 157, 143; /* Para usar en rgba(var(--primary-rgb), alpha) */
+    --text-color: #2C3E50;
+    --light-color: #F8F9FA;
+    --gray-100: #F8F9FA;
+    --gray-200: #E9ECEF;
+    --gray-300: #DEE2E6;
+    --gray-400: #CED4DA;
+    --gray-500: #ADB5BD;
+    --gray-600: #6C757D;
+    --gray-700: #495057;
+    --gray-800: #343A40;
+    --gray-900: #212529;
+
+    /* Colores de Feedback */
+    --success-color: #10B981; /* Verde Esmeralda Tailwind */
+    --success-rgb: 16, 185, 129;
+    --warning-color: #F59E0B; /* Amarillo Ámbar Tailwind */
+    --danger-color: #EF4444;  /* Rojo Tailwind */
+    --danger-rgb: 239, 68, 68;
+    --info-color: #3B82F6;    /* Azul Tailwind */
+
+    /* Color de Superficie */
+    --surface-color: #FFFFFF; /* Blanco para elementos elevados sobre fondos claros */
+
+    /* Sistema de espaciado */
+    --space-xs: 0.2rem;
+    --space-sm: 0.4rem;
+    --space-md: 0.8rem;
+    --space-lg: 1.2rem;
+    --space-xl: 1.6rem;
+    --space-2xl: 2rem;
+    --space-3xl: 2.4rem;
+
+    /* Sistema de tipografía */
+    --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Tamaños de fuente */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+
+    /* Sistema de sombras */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-navbar: 0 2px 10px rgba(0, 0, 0, 0.08);
+    --shadow-navbar-scrolled: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-btn-nav-hover: 0 6px 12px rgba(var(--primary-rgb), 0.25);
+    --shadow-navbar-collapse: 0 8px 16px rgba(0, 0, 0, 0.08);
+    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+    /* Bordes redondeados */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 1rem;
+    --radius-pill: 50px;
+    --radius-full: 9999px;
+
+    /* Transiciones */
+    --transition-all: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-transform: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-opacity: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Z-index Scale */
+    --z-hide: -1;
+    --z-base: 0;
+    --z-auto: auto;
+    --z-elevated: 10; /* Para elementos elevados sutilmente */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-navbar: 1030;     /* Específico para el navbar principal */
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+    --z-max: 9999;       /* Para elementos que deben estar encima de todo */
+
+    /* From booking.css (unique variables) */
+    --dark-color: #1A1A1A; /* This was also in styles.css implicitly, formalizing */
+    --shadow-color: rgba(42, 157, 143, 0.1);
+
+    /* Alpha White Colors (for use on dark backgrounds) */
+    --white-alpha-10: rgba(255,255,255,0.1);
+    --white-alpha-20: rgba(255,255,255,0.2);
+    --white-alpha-50: rgba(255,255,255,0.5); /* Added for general use */
+    --white-alpha-70: rgba(255,255,255,0.7);
+    --white-alpha-80: rgba(255,255,255,0.8);
+}

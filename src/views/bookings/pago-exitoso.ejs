@@ -22,19 +22,16 @@
             <span id="guestsInfo" class="fw-bold"></span>
         </div>
         <div class="detail-row">
-            <span>Total Pagado:</span>
+            <span><i class="fas fa-euro-sign"></i> Total Pagado:</span>
             <span id="totalPaid" class="fw-bold"></span>
         </div>
     </div>
 
     <div class="confirmation-info">
-        <p class="confirmation-email">
-            <i class="fas fa-envelope"></i>
-            Hemos enviado un correo electrónico con todos los detalles de tu reserva.
-        </p>
+
         <p class="text-muted">
             <i class="fas fa-phone"></i>
-            Si tienes alguna pregunta, no dudes en contactarnos al +34 XXX XXX XXX
+            Si tienes alguna pregunta, no dudes en contactarnos al +34 690694840
         </p>
     </div>
 
@@ -49,14 +46,46 @@
 document.addEventListener('DOMContentLoaded', function() {
     const bookingData = JSON.parse(sessionStorage.getItem('bookingData'));
     if (bookingData) {
-        document.getElementById('checkInDate').textContent = bookingData.checkIn;
-        document.getElementById('checkOutDate').textContent = bookingData.checkOut;
+        // Formatear las fechas
+        const formatearFecha = (fechaStr) => {
+            const [dia, mes, año] = fechaStr.split('/');
+            return new Date(año, mes - 1, dia).toLocaleDateString('es-ES', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        };
+
+        // Mostrar los datos de la reserva
+        document.getElementById('checkInDate').textContent = formatearFecha(bookingData.checkIn);
+        document.getElementById('checkOutDate').textContent = formatearFecha(bookingData.checkOut);
         document.getElementById('guestsInfo').textContent = 
-            `${bookingData.adults} adultos, ${bookingData.children} niños`;
-        document.getElementById('totalPaid').textContent = bookingData.totalPrice + '€';
+            `${bookingData.adults} adulto${bookingData.adults !== 1 ? 's' : ''}, ` +
+            `${bookingData.children} niño${bookingData.children !== 1 ? 's' : ''}`;
+        document.getElementById('totalPaid').textContent = bookingData.totalPrice;
+
+        // Mostrar detalles del pago si están disponibles
+        if (bookingData.paymentDetails) {
+            const paymentInfo = document.createElement('div');
+            paymentInfo.className = 'detail-row';
+            paymentInfo.innerHTML = `
+                <span><i class="fas fa-receipt"></i> ID de Transacción:</span>
+                <span class="fw-bold">${bookingData.paymentDetails.id}</span>
+            `;
+            document.querySelector('.booking-details').appendChild(paymentInfo);
+        }
         
         // Limpiar los datos de la sesión después de mostrarlos
         sessionStorage.removeItem('bookingData');
+    } else {
+        // Si no hay datos, mostrar mensaje alternativo
+        document.querySelector('.booking-details').innerHTML = `
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                Los detalles de tu reserva han sido enviados a tu correo electrónico.
+            </div>
+        `;
     }
 });
 </script>

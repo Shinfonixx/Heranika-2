@@ -1,0 +1,158 @@
+/* Secciones específicas */
+
+/* Features Section */
+.features-section {
+    background: white;
+}
+
+.feature-card {
+    background-color: #F4F8F3;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Sleeping Section */
+.sleeping-section {
+    background: white;
+}
+
+.sleeping-card {
+    background-color: #F4F8F3;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+    transition: var(--transition-all);
+}
+
+.sleeping-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.bed-icon {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.amenities-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+}
+
+.amenities-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--gray-600);
+}
+
+.amenities-list li i {
+    color: var(--primary-color);
+}
+
+/* Location Section */
+.location-section {
+    background: #F4F8F3;
+}
+
+/* Amenities Section */
+.amenities-section {
+    background: white
+}
+
+.amenities-card {
+    background-color: #F4F8F3;
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease;
+}
+
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.amenity-item i {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+}
+
+/* Reviews Section */
+.reviews-section {
+    background: var(--light-color);
+}
+
+/* CTA Section */
+.cta-section {
+    background: white;
+}
+
+.cta-card {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    box-shadow: var(--shadow-lg);
+}
+
+.cta-features {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cta-feature i {
+    color: var(--success-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .amenities-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-features {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+}

@@ -1,56 +1,104 @@
-.summary-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 30px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.summary-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.summary-section {
-    background: #f8f9fa;
-    padding: 20px;
+.booking-summary {
+    background-color: #F4F8F3;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
-    margin-bottom: 25px;
 }
 
-.detail-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #e9ecef;
+.booking-summary .card-body {
+    color: var(--gray-800);
+    padding: 2rem;
 }
 
-.detail-row.total {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 2px solid var(--accent-color);
-    font-weight: bold;
+.booking-summary .text-primary {
+    color: var(--primary-color);
 }
 
-.payment-section {
-    margin-top: 40px;
-    text-align: center;
+.booking-summary .text-success {
+    color: var(--success-color);
 }
 
-#paypal-button-container {
-    max-width: 400px;
-    margin: 0 auto;
+.booking-summary .fw-bold {
+    color: var(--gray-900);
 }
 
-.detail-label {
-    color: #666;
-    font-weight: 500;
+.booking-summary .btn-primary {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.9);
+    color: white;
 }
 
-.detail-value {
+.booking-summary .btn-primary:hover {
+    background-color: white;
+    border-color: white;
+    color: white;
+}
+
+.booking-summary .summary-item {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.booking-summary .summary-item:last-child {
+    border-bottom: none;
+}
+
+.booking-summary .summary-item.total {
+    background-color: rgba(0, 128, 0, 0.1);
+    border: none;
+    color: var(--gray-800);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.booking-summary .summary-item.total .text-success {
+    color: var(--success-color);
+}
+
+.booking-summary .summary-item.total .fw-bold {
+    color: var(--gray-900);
+}
+
+.booking-summary .summary-item .text-primary {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.booking-summary .summary-item .text-success {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.booking-summary .summary-item .fw-bold {
+    color: white;
+}
+
+.booking-summary .summary-item .btn-primary {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.9);
+    color: var(--primary-color);
+}
+
+.booking-summary .summary-item .btn-primary:hover {
+    background-color: white;
+    border-color: white;
+    color: var(--primary-color);
+}
+
+.booking-summary .btn-primary {
+    background-color: rgba(0, 128, 0, 0.1);
+    border-color: rgba(0, 128, 0, 0.1);
+    color: var(--gray-800);
+    padding: 0.75rem;
+}
+
+.booking-summary .btn-primary:hover {
+    background-color: rgba(0, 128, 0, 0.2);
+    border-color: rgba(0, 128, 0, 0.2);
+    color: var(--gray-900);
+}
+
+.booking-summary .detail-value {
     font-weight: 600;
-    color: #333;
+    color: white;
 }
 
 .summary-section h3 {
@@ -65,22 +113,13 @@
     font-size: 1.25rem;
 }
 
-.payment-options {
-    background: #f8f9fa;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-}
-
-
-/* Estilos para la página de pago exitoso */
 .success-container {
     max-width: 600px;
     margin: 60px auto;
     padding: 40px;
-    background: white;
+    background: #F4F8F3;
     border-radius: 20px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
@@ -92,13 +131,13 @@
 }
 
 .success-container h2 {
-    color: #333;
+    color: var(--gray-800);
     margin-bottom: 1rem;
     font-size: 2rem;
 }
 
 .booking-details {
-    background: #f8f9fa;
+    background: #F4F8F3;
     padding: 2rem;
     border-radius: 15px;
     margin: 2rem 0;

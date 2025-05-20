@@ -1,0 +1,93 @@
+/* Importación de fuentes desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;700;800&display=swap');
+
+/*
+  Poppins: weights 400 (regular), 500 (medium), 700 (bold), 800 (extrabold)
+  Playfair Display: weights 400 (regular), 700 (bold)
+  JetBrains Mono: weight 400 (regular)
+*/
+
+/* Estilos de tipografía globales */
+
+/*
+  Los estilos base para 'body' (font-family, line-height, color) ya están en _base.css
+  Aquí podemos definir estilos para encabezados y otros elementos de texto.
+*/
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans); /* Poppins para todos los encabezados */
+  color: var(--text-color); /* Color más neutro y moderno */
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-md);
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: var(--text-4xl);
+  font-weight: 800; /* Extrabold */
+}
+
+h2 {
+  font-size: var(--text-3xl);
+  font-weight: 700; /* Bold */
+}
+
+h3 {
+  font-size: var(--text-2xl);
+  font-weight: 700; /* Bold */
+}
+
+h4 {
+  font-size: var(--text-xl);
+  font-weight: 700; /* Bold */
+}
+
+h5 {
+  font-size: var(--text-lg);
+  font-weight: 500; /* Medium */
+}
+
+h6 {
+  font-size: var(--text-base);
+  font-weight: 500; /* Medium */
+}
+
+p {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  margin-bottom: var(--space-md);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition-all);
+}
+
+a:hover {
+  color: var(--accent-color); /* Hover más vibrante */
+  text-decoration: underline;
+}
+
+blockquote {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-style: italic;
+  color: var(--gray-700);
+  border-left: 4px solid var(--accent-color);
+  padding-left: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+code, pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background-color: var(--gray-100);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+}
+
+pre {
+  padding: var(--space-md);
+  overflow-x: auto;
+}

@@ -89,13 +89,4 @@ router.post('/logout', (req, res) => {
         res.redirect('/');
     });
 });
-
-// Remove the /check endpoint as it's no longer needed
-// router.get('/check', (req, res) => {
-//     res.json({
-//         isAuthenticated: !!req.session.userId
-//     });
-// });
-
-// Make sure this is at the end of the file
 module.exports = router;

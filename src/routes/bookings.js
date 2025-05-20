@@ -71,17 +71,44 @@ router.get('/check-auth', (req, res) => {
 router.post('/', async (req, res) => {
     console.log('Datos recibidos:', req.body);
     try {
+        // Verificar autenticación
         if (!req.session.userId) {
+            console.error('Intento de reserva sin autenticación');
             return res.status(401).json({ 
                 success: false, 
                 error: 'Debe iniciar sesión para realizar una reserva' 
             });
         }
 
+        // Validar datos requeridos
+        const requiredFields = ['checkIn', 'checkOut', 'adults', 'totalPrice'];
+        for (const field of requiredFields) {
+            if (!req.body[field]) {
+                console.error(`Campo requerido faltante: ${field}`);
+                return res.status(400).json({
+                    success: false,
+                    error: `El campo ${field} es requerido`
+                });
+            }
+        }
+
+        // Validar fechas
+        const checkIn = new Date(req.body.checkIn);
+        const checkOut = new Date(req.body.checkOut);
+
+        if (isNaN(checkIn.getTime()) || isNaN(checkOut.getTime())) {
+            console.error('Fechas inválidas:', { checkIn: req.body.checkIn, checkOut: req.body.checkOut });
+            return res.status(400).json({
+                success: false,
+                error: 'Las fechas proporcionadas no son válidas'
+            });
+        }
+
+        // Crear la reserva
         const booking = new Booking({
             user: req.session.userId,
-            checkIn: new Date(req.body.checkIn),
-            checkOut: new Date(req.body.checkOut),
+            checkIn: checkIn,
+            checkOut: checkOut,
             guests: {
                 adults: parseInt(req.body.adults),
                 children: parseInt(req.body.children) || 0
@@ -89,16 +116,20 @@ router.post('/', async (req, res) => {
             totalPrice: parseFloat(req.body.totalPrice)
         });
 
+        console.log('Intentando guardar reserva:', booking);
+
+        // Guardar la reserva
         await booking.save();
+        
+        console.log('Reserva guardada exitosamente:', booking);
         
         res.status(201).json({ 
             success: true,
             message: 'Reserva creada exitosamente',
             booking: booking
         });
-        console.log('Reserva guardada:', booking);
     } catch (error) {
-        console.error('Error detallado:', error);
+        console.error('Error al crear la reserva:', error);
         res.status(500).json({ 
             success: false,
             error: 'Error al procesar la reserva'

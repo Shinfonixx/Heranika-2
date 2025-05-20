@@ -19,6 +19,9 @@
             </ul>
             
             <div class="d-flex align-items-center">
+                <a href="/reservas" class="btn btn-primary me-3 nav-book-btn">
+                    <i class="fas fa-calendar-alt me-2"></i>Reservar ahora
+                </a>
                 <% if (locals.user) { %>
                     <div class="dropdown">
                         <button class="btn btn-link dropdown-toggle user-dropdown" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -29,6 +32,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item" href="/reservas/mis-reservas"><i class="fas fa-calendar-alt"></i> Mis Reservas</a></li>
+                            <li><a class="dropdown-item" href="/contact"><i class="fas fa-envelope"></i> Contacto</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form action="/logout" method="POST" class="dropdown-item-form">

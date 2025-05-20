@@ -1,0 +1,414 @@
+/* Estilos para formularios */
+
+/* Grupo de Formulario */
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+/* Etiqueta de Formulario */
+.form-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600; /* Semibold */
+    color: var(--text-color);
+    margin-bottom: var(--space-xs);
+}
+
+/* Control de Formulario Base (aplicable a inputs, textareas, selects) */
+.form-control,
+.form-select {
+    display: block;
+    width: 100%;
+    padding: var(--space-sm) var(--space-md); /* ej. 0.4rem 0.8rem */
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--surface-color);
+    background-clip: padding-box;
+    border: 1px solid var(--gray-300);
+    appearance: none; /* Quita estilos nativos, especialmente en selects */
+    border-radius: var(--radius-md);
+    transition: var(--transition-all);
+}
+
+.form-control::placeholder {
+    color: var(--gray-500);
+    opacity: 1; /* Firefox usa menor opacidad por defecto */
+}
+
+.form-control:hover,
+.form-select:hover {
+    border-color: var(--gray-400);
+}
+
+.form-control:focus,
+.form-select:focus {
+    color: var(--text-color);
+    background-color: var(--surface-color);
+    border-color: var(--primary-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25);
+}
+
+/* Estilos específicos para select si es necesario (ej. flecha) */
+.form-select {
+    /* Para un icono de flecha personalizado, si se desea más adelante */
+    /* background-image: url("data:image/svg+xml,..."); */
+    /* background-repeat: no-repeat; */
+    /* background-position: right var(--space-md) center; */
+    /* background-size: 16px 12px; */
+    padding-right: var(--space-md) * 2.5; /* Espacio para la flecha */
+}
+
+/* Textarea */
+textarea.form-control {
+    min-height: calc(1.6em + (var(--space-sm) * 2) + 2px) * 3; /* Aproximadamente 3 líneas */
+    resize: vertical;
+}
+
+/* Form Floating (mantener los estilos existentes y asegurar compatibilidad) */
+.form-floating {
+    margin-bottom: 1rem; /* Ya existente */
+}
+
+/* Form Control & Select Focus (actualizado arriba) */
+/* .form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.25);
+} */
+
+/* Form Check */
+.form-check {
+    display: block;
+    margin-bottom: var(--space-sm);
+}
+
+.form-check-input {
+    width: 1.15em;
+    height: 1.15em;
+    margin-top: 0.2em; /* Alineación vertical con el label */
+    vertical-align: top;
+    background-color: var(--surface-color);
+    border: 1px solid var(--gray-400);
+    border-radius: var(--radius-sm); /* Un poco más redondeado para checkboxes */
+    transition: var(--transition-all);
+}
+
+.form-check-input[type="radio"] {
+    border-radius: 50%;
+}
+
+.form-check-input:hover {
+    border-color: var(--gray-500);
+}
+
+.form-check-input:focus {
+    border-color: var(--primary-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25);
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Estilo del "tick" para checkboxes cuando están checked */
+.form-check-input:checked[type="checkbox"] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 65%;
+}
+
+/* Estilo del círculo interior para radios cuando están checked */
+.form-check-input:checked[type="radio"] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}
+
+.form-check-label {
+    margin-left: var(--space-sm);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    color: var(--text-color);
+}
+
+/* Mensajes de Feedback/Validación */
+.form-text {
+    display: block;
+    margin-top: var(--space-xs);
+    font-size: var(--text-sm);
+    color: var(--gray-600);
+}
+
+.valid-feedback,
+.invalid-feedback {
+    display: none; /* Oculto por defecto, se muestra con JS o clases .is-valid/.is-invalid en el padre */
+    width: 100%;
+    margin-top: var(--space-xs);
+    font-size: var(--text-sm);
+}
+
+.valid-feedback {
+    color: var(--success-color);
+}
+
+.invalid-feedback {
+    color: var(--danger-color);
+}
+
+/* Estilos para .form-control y .form-select con validación */
+.form-control.is-valid,
+.form-select.is-valid {
+    border-color: var(--success-color);
+}
+
+.form-control.is-valid:focus,
+.form-select.is-valid:focus {
+    border-color: var(--success-color);
+    box-shadow: 0 0 0 0.2rem rgba(var(--success-rgb), 0.25);
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: var(--danger-color);
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+    border-color: var(--danger-color);
+    box-shadow: 0 0 0 0.2rem rgba(var(--danger-rgb), 0.25);
+}
+
+/* Para mostrar mensajes cuando el input tiene la clase */
+/* Asume que el mensaje de feedback es un hermano que sigue al input */
+.form-control.is-valid ~ .valid-feedback,
+.form-control.is-invalid ~ .invalid-feedback,
+.form-select.is-valid ~ .valid-feedback,
+.form-select.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Estilos para .form-check-input con validación */
+.form-check-input.is-valid {
+    border-color: var(--success-color);
+}
+
+.form-check-input.is-valid:checked {
+    background-color: var(--success-color); /* O mantener --primary-color y solo borde verde */
+}
+
+.form-check-input.is-valid:focus {
+    box-shadow: 0 0 0 0.2rem rgba(var(--success-rgb), 0.25);
+}
+
+.form-check-input.is-invalid {
+    border-color: var(--danger-color);
+}
+
+.form-check-input.is-invalid:checked {
+    background-color: var(--danger-color);
+}
+
+.form-check-input.is-invalid:focus {
+    box-shadow: 0 0 0 0.2rem rgba(var(--danger-rgb), 0.25);
+}
+
+.form-check-input.is-invalid ~ .form-check-label {
+    color: var(--danger-color);
+}
+
+/* Mostrar mensajes de feedback para form-check */
+.form-check-input.is-valid ~ .valid-feedback,
+.form-check-input.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+
+/* Inputs deshabilitados */
+.form-control:disabled, .form-control[readonly],
+.form-select:disabled, .form-select[readonly] {
+    background-color: var(--gray-100);
+    border-color: var(--gray-300);
+    opacity: 1;
+    cursor: not-allowed;
+}
+
+.form-check-input:disabled {
+    background-color: var(--gray-100);
+    border-color: var(--gray-300);
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.form-check-input:disabled ~ .form-check-label {
+    color: var(--gray-600);
+    cursor: not-allowed;
+}
+
+/* Inputs Especiales */
+
+/* Input Range */
+.form-range {
+    width: 100%;
+    height: var(--space-lg); /* Altura total del control para interaccion */
+    padding: 0; /* Sobrescribe padding de .form-control si se combina */
+    background-color: transparent; /* Sobrescribe .form-control */
+    appearance: none;
+    -webkit-appearance: none;
+    border: none; /* Sobrescribe .form-control */
+    outline: none; /* Quitar outline en focus */
+    cursor: pointer;
+}
+
+.form-range:focus {
+    outline: none;
+    box-shadow: none; /* Quitar box-shadow de .form-control:focus */
+}
+
+/* Track */
+.form-range::-webkit-slider-runnable-track {
+    width: 100%;
+    height: var(--space-xs);
+    background-color: var(--gray-300);
+    border-radius: var(--radius-sm);
+    transition: var(--transition-all);
+}
+
+.form-range::-moz-range-track {
+    width: 100%;
+    height: var(--space-xs);
+    background-color: var(--gray-300);
+    border-radius: var(--radius-sm);
+    border: none; /* Mozilla a veces añade borde */
+    transition: var(--transition-all);
+}
+
+/* Thumb */
+.form-range::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: var(--space-md); /* ej. 1rem */
+    height: var(--space-md);
+    background-color: var(--primary-color);
+    border-radius: var(--radius-full);
+    border: 2px solid var(--surface-color);
+    box-shadow: var(--shadow-sm);
+    margin-top: calc((var(--space-md) - var(--space-xs)) / -2 ); /* Centrar verticalmente */
+    transition: var(--transition-all);
+}
+
+.form-range::-moz-range-thumb {
+    appearance: none;
+    width: var(--space-md);
+    height: var(--space-md);
+    background-color: var(--primary-color);
+    border-radius: var(--radius-full);
+    border: 2px solid var(--surface-color);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-all);
+}
+
+/* Focus y Hover para Thumb */
+.form-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25), var(--shadow-sm);
+}
+
+.form-range:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25), var(--shadow-sm);
+}
+
+.form-range::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+.form-range::-moz-range-thumb:hover {
+    transform: scale(1.1);
+}
+
+.form-range:active::-webkit-slider-thumb {
+    background-color: var(--primary-dark-color, var(--primary-color)); /* Usar una variable más oscura si existe */
+}
+
+.form-range:active::-moz-range-thumb {
+    background-color: var(--primary-dark-color, var(--primary-color));
+}
+
+/* Input Color */
+.form-control-color {
+    /* Hereda de .form-control implícitamente si se usa <input type="color" class="form-control form-control-color"> */
+    /* O se pueden definir aquí los estilos base si se usa solo <input type="color" class="form-control-color"> */
+    width: 100%; /* O un ancho fijo si se prefiere, ej. max-content o un valor en rem */
+    max-width: 10rem; /* Evitar que sea demasiado ancho si es 100% */
+    height: calc(var(--text-base) * 1.6 + var(--space-sm) * 2 + 4px); /* Altura similar a .form-control + un poco más para el swatch */
+    padding: var(--space-xs); /* Padding interno para el swatch */
+    cursor: pointer;
+}
+
+/* Para asegurar que el swatch de color ocupe el espacio del padding */
+.form-control-color::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.form-control-color::-webkit-color-swatch {
+    border: none; /* Quitar borde nativo si lo hay */
+    border-radius: calc(var(--radius-md) - var(--space-xs)); /* Hacerlo un poco más pequeño que el radio del control */
+}
+
+.form-control-color::-moz-color-swatch {
+    border: none;
+    border-radius: calc(var(--radius-md) - var(--space-xs));
+}
+
+/* Input File */
+.form-control[type="file"] {
+    padding-right: var(--space-sm); /* Ajustar padding para que el texto del archivo no se solape con el botón si es muy largo */
+    /* El line-height puede necesitar ajustarse para alinear el texto del archivo con el botón si no se ve bien */
+    line-height: 1.5; /* Default de Bootstrap, pero puede variar. Ajustar si es necesario. */
+}
+
+/* Ocultar el texto "No file chosen" o similar que algunos navegadores ponen por defecto si se quiere un control total */
+/* .form-control[type="file"]:not(:focus):not([disabled]):not([readonly])::-webkit-file-upload-button {
+    color: transparent; 
+} */
+
+.form-control[type="file"]::file-selector-button,
+.form-control[type="file"]::-webkit-file-upload-button, /* Para Safari y Chrome antiguos */
+.form-control[type="file"]::-moz-file-selector-button { /* Firefox (aunque ::file-selector-button debería ser suficiente) */
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-color);
+    background-color: var(--gray-100);
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-md);
+    margin-inline-start: calc(var(--space-sm) * -1); /* Negativo del padding-left del form-control */
+    margin-inline-end: var(--space-md); /* Espacio entre el botón y el texto del archivo */
+    margin-top: calc(var(--space-sm) * -1); /* Negativo del padding-top del form-control */
+    margin-bottom: calc(var(--space-sm) * -1); /* Negativo del padding-bottom del form-control */
+    transition: var(--transition-all);
+    cursor: pointer;
+}
+
+.form-control[type="file"]::file-selector-button:hover,
+.form-control[type="file"]::-webkit-file-upload-button:hover,
+.form-control[type="file"]::-moz-file-selector-button:hover {
+    background-color: var(--gray-200);
+    border-color: var(--gray-400);
+}
+
+/* Estilos de focus para el botón (si es posible, a veces el focus va al input general) */
+.form-control[type="file"]:focus::file-selector-button,
+.form-control[type="file"]:focus::-webkit-file-upload-button,
+.form-control[type="file"]:focus::-moz-file-selector-button {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.15); /* Sombra más sutil para el botón interno */
+}

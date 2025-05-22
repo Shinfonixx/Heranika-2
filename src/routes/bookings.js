@@ -1,3 +1,25 @@
+/**
+ * Rutas de Gestión de Reservas
+ * 
+ * Este archivo maneja todas las rutas relacionadas con el proceso de reserva:
+ * - Obtener fechas no disponibles para el calendario
+ * - Procesar nuevas reservas
+ * - Manejar confirmaciones de pago
+ * - Gestionar reservas existentes
+ * - Enviar correos de confirmación
+ * 
+ * Rutas principales:
+ * - GET /disabled-dates: Obtiene fechas no disponibles
+ * - POST /: Crea una nueva reserva
+ * - GET /pago-exitoso: Muestra la página de pago exitoso
+ * - GET /: Muestra el historial de reservas del usuario
+ * 
+ * Seguridad:
+ * - La mayoría de las rutas requieren autenticación
+ * - Validación de datos de entrada
+ * - Manejo de errores detallado
+ */
+
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../middleware/auth');
@@ -151,7 +173,7 @@ router.post('/', async (req, res) => {
             });
         }
         
-        if (totalGuests > 10) { // Ajusta este límite según sea necesario
+        if (totalGuests > 10) {
             return res.status(400).json({
                 success: false,
                 error: 'El número máximo de huéspedes por reserva es 10'

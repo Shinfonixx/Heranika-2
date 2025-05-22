@@ -1,3 +1,15 @@
+/**
+ * Estilos Principales de Heranika
+ * 
+ * Este archivo es el punto de entrada principal de estilos para la aplicación.
+ * Importa y organiza todos los estilos parciales y define estilos globales.
+ * 
+ * Estructura:
+ * 1. Importaciones de archivos parciales
+ * 2. Estilos globales y de componentes compartidos
+ * 3. Media queries para diseño responsivo
+ */
+
 /* CSS Global Imports */
 @import "variables.css";
 @import "_base.css";

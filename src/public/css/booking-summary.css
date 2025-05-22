@@ -10,28 +10,73 @@
     padding: 2rem;
 }
 
-.booking-summary .text-primary {
-    color: var(--primary-color);
+/* Cambiar color de iconos a negro */
+.booking-summary .text-primary,
+.booking-summary .fa-calendar-check,
+.booking-summary .fa-calendar-times,
+.booking-summary .fa-moon,
+.booking-summary .fa-users {
+    color: #000000 !important;
 }
 
 .booking-summary .text-success {
-    color: var(--success-color);
+    color: #28a745 !important; /* Verde para el texto de éxito */
+}
+
+/* Asegurar que el icono de euro sea verde */
+.booking-summary .fa-euro-sign.text-success {
+    color: #28a745 !important;
 }
 
 .booking-summary .fw-bold {
     color: var(--gray-900);
 }
 
-.booking-summary .btn-primary {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.9);
-    color: white;
+/* Reset de estilos para el botón */
+.booking-summary .btn-success,
+.booking-summary .btn-success:link,
+.booking-summary .btn-success:visited,
+.booking-summary .btn-success:hover,
+.booking-summary .btn-success:focus,
+.booking-summary .btn-success:active,
+.booking-summary .btn-success:not(:disabled),
+.booking-summary .btn-success:disabled {
+    background-color: #28a745 !important;
+    background-image: none !important;
+    border-color: #28a745 !important;
+    color: white !important;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    opacity: 1;
+    transform: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    text-decoration: none !important;
+    transition: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
 }
 
-.booking-summary .btn-primary:hover {
-    background-color: white;
-    border-color: white;
-    color: white;
+/* Estilo específico para el estado deshabilitado */
+.booking-summary .btn-success:disabled {
+    cursor: not-allowed;
+    opacity: 0.7 !important;
+}
+
+/* Eliminar cualquier estilo de Bootstrap que pueda estar causando el hover */
+.booking-summary .btn-success:hover,
+.booking-summary .btn-success:focus,
+.booking-summary .btn-success:active {
+    background-color: #28a745 !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+/* Mantener compatibilidad con botones primarios por si acaso */
+.booking-summary .btn-primary {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
 }
 
 .booking-summary .summary-item {

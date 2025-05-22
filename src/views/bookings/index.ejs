@@ -37,28 +37,28 @@
                     <h3 class="text-center mb-4">Resumen de la Reserva</h3>
                     <div class="summary-item">
                         <div class="d-flex align-items-center">
-                            <i class="fas fa-calendar-check me-2 text-primary"></i>
+                            <i class="fas fa-calendar-check me-2 color-black"></i>
                             <span>Entrada:</span>
                         </div>
                         <span id="checkInDisplay" class="fw-bold">-</span>
                     </div>
                     <div class="summary-item">
                         <div class="d-flex align-items-center">
-                            <i class="fas fa-calendar-times me-2 text-primary"></i>
+                            <i class="fas fa-calendar-times me-2 color-black"></i>
                             <span>Salida:</span>
                         </div>
                         <span id="checkOutDisplay" class="fw-bold">-</span>
                     </div>
                     <div class="summary-item">
                         <div class="d-flex align-items-center">
-                            <i class="fas fa-moon me-2 text-primary"></i>
+                            <i class="fas fa-moon me-2 color-black"></i>
                             <span>Noches:</span>
                         </div>
                         <span id="nightsCount" class="fw-bold">0</span>
                     </div>
                     <div class="summary-item">
                         <div class="d-flex align-items-center">
-                            <i class="fas fa-users me-2 text-primary"></i>
+                            <i class="fas fa-users me-2 color-black"></i>
                             <span>Huéspedes:</span>
                         </div>
                         <span id="guestsCount" class="fw-bold">1 adulto, 0 niños</span>
@@ -71,7 +71,7 @@
                         </div>
                         <span id="totalPrice" class="fs-4 fw-bold text-success">150€</span>
                     </div>
-                    <button id="continueButton" class="btn btn-primary w-100 mt-4 py-3" disabled>
+                    <button id="continueButton" class="btn btn-success w-100 mt-4 py-3" disabled>
                         <i class="fas fa-arrow-right me-2"></i>
                         Continuar con la reserva
                     </button>
@@ -170,9 +170,14 @@ document.addEventListener('DOMContentLoaded', function() {
         minDate: "today",
         locale: "es",
         dateFormat: "d/m/Y",
-        onChange: function(selectedDates) {
+        onChange: function(selectedDates, dateStr, instance) {
+            console.log('onChange - Fechas seleccionadas:', selectedDates);
             if (selectedDates.length === 2) {
+                console.log('Dos fechas seleccionadas, actualizando resumen...');
                 updateBookingSummary(selectedDates[0], selectedDates[1]);
+            } else {
+                console.log('Selecciona dos fechas para habilitar el botón');
+                document.getElementById('continueButton').disabled = true;
             }
         },
         onDayCreate: function(dObj, dStr, fp, dayElem) {
@@ -195,18 +200,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Actualizar resumen cuando cambian los huéspedes
-    document.getElementById('adults').addEventListener('change', updateGuestCount);
-    document.getElementById('children').addEventListener('change', updateGuestCount);
+    document.getElementById('adults').addEventListener('change', function() {
+        console.log('Número de adultos cambiado');
+        updateGuestCount();
+    });
+    document.getElementById('children').addEventListener('change', function() {
+        console.log('Número de niños cambiado');
+        updateGuestCount();
+    });
 
     function updateBookingSummary(checkIn, checkOut) {
+        console.log('updateBookingSummary llamado con:', checkIn, checkOut);
         const nights = calculateNights(checkIn, checkOut);
         const total = nights * basePrice;
 
+        // Actualizar la interfaz
         document.getElementById('checkInDisplay').textContent = formatDate(checkIn);
         document.getElementById('checkOutDisplay').textContent = formatDate(checkOut);
         document.getElementById('nightsCount').textContent = nights;
         document.getElementById('totalPrice').textContent = `${total}€`;
-        document.getElementById('continueButton').disabled = false;
+        
+        // Habilitar el botón
+        const continueButton = document.getElementById('continueButton');
+        continueButton.disabled = false;
+        console.log('Botón continuar habilitado:', !continueButton.disabled);
+        
+        // Actualizar el contador de huéspedes
+        updateGuestCount();
     }
 
     function calculateNights(checkIn, checkOut) {
@@ -223,26 +243,50 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateGuestCount() {
-        const adults = parseInt(document.getElementById('adults').value) || 0;
+        const adults = parseInt(document.getElementById('adults').value) || 1;
         const children = parseInt(document.getElementById('children').value) || 0;
-        document.getElementById('guestsCount').textContent = 
-            `${adults} adulto${adults !== 1 ? 's' : ''}, ${children} niño${children !== 1 ? 's' : ''}`;
+        document.getElementById('guestsCount').textContent = `${adults} ${adults === 1 ? 'adulto' : 'adultos'}${children > 0 ? `, ${children} ${children === 1 ? 'niño' : 'niños'}` : ''}`;
     }
 
     // Manejar el envío del formulario
-    document.getElementById('continueButton').addEventListener('click', function() {
-        // Aquí añadiremos la lógica para procesar la reserva
-        // Por ahora, solo almacenaremos los datos en sessionStorage
+    document.getElementById('continueButton').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevenir el comportamiento por defecto del botón
+        
+        const checkIn = document.getElementById('checkInDisplay').textContent;
+        const checkOut = document.getElementById('checkOutDisplay').textContent;
+        const nights = document.getElementById('nightsCount').textContent;
+        const guests = document.getElementById('guestsCount').textContent;
+        const totalPrice = document.getElementById('totalPrice').textContent;
+
+        // Validar que las fechas estén seleccionadas
+        if (checkIn === '-' || checkOut === '-') {
+            alert('Por favor, selecciona las fechas de entrada y salida');
+            return;
+        }
+
+        // Obtener los valores numéricos de adultos y niños
+        const adults = parseInt(document.getElementById('adults').value) || 1;
+        const children = parseInt(document.getElementById('children').value) || 0;
+        
+        // Crear el texto formateado de huéspedes
+        const guestsText = `${adults} ${adults === 1 ? 'adulto' : 'adultos'}` + 
+                         (children > 0 ? `, ${children} ${children === 1 ? 'niño' : 'niños'}` : '');
+        
+        // Almacenar los datos de la reserva en sessionStorage
         const bookingData = {
-            checkIn: document.getElementById('checkInDisplay').textContent,
-            checkOut: document.getElementById('checkOutDisplay').textContent,
-            nights: document.getElementById('nightsCount').textContent,
-            adults: document.getElementById('adults').value,
-            children: document.getElementById('children').value,
-            totalPrice: document.getElementById('totalPrice').textContent
+            checkIn: checkIn,
+            checkOut: checkOut,
+            nights: nights,
+            adults: adults,
+            children: children,
+            guests: guestsText,  // Texto formateado
+            totalPrice: totalPrice.replace('€', '').trim()
         };
         
+        console.log('Datos de la reserva:', bookingData); // Para depuración
         sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
+        
+        // Redirigir a la página de resumen
         window.location.href = '/reservas/summary';
     });
 });

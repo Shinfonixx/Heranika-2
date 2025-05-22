@@ -1,0 +1,47 @@
+/* Estilos para el acordeón de preguntas frecuentes */
+.faq-section .accordion-button {
+    background-color: #e8f5e9; /* Verde clarito */
+    color: #2e7d32; /* Verde oscuro para el texto */
+    font-weight: 500;
+    border: none;
+    box-shadow: none;
+}
+
+.faq-section .accordion-button:not(.collapsed) {
+    background-color: #c8e6c9; /* Un poco más oscuro cuando está abierto */
+    color: #1b5e20; /* Texto más oscuro cuando está abierto */
+    box-shadow: none;
+}
+
+.faq-section .accordion-button:focus {
+    border-color: #81c784;
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+}
+
+.faq-section .accordion-body {
+    background-color: #f1f8e9; /* Fondo verde muy claro para el contenido */
+    border-left: 3px solid #81c784; /* Borde lateral verde */
+    margin-top: 0;
+    padding: 1rem 1.25rem;
+}
+
+.faq-section .accordion-item {
+    border: 1px solid #c8e6c9;
+    margin-bottom: 0.5rem;
+    border-radius: 0.375rem !important;
+    overflow: hidden;
+}
+
+/* Eliminar el borde superior del primer ítem */
+.faq-section .accordion-item:first-of-type {
+    border-top: 1px solid #c8e6c9;
+}
+
+/* Estilo para el icono del acordeón */
+.faq-section .accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232e7d32'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.faq-section .accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%231b5e20'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}

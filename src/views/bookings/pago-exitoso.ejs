@@ -60,10 +60,23 @@ document.addEventListener('DOMContentLoaded', function() {
         // Mostrar los datos de la reserva
         document.getElementById('checkInDate').textContent = formatearFecha(bookingData.checkIn);
         document.getElementById('checkOutDate').textContent = formatearFecha(bookingData.checkOut);
-        document.getElementById('guestsInfo').textContent = 
-            `${bookingData.adults} adulto${bookingData.adults !== 1 ? 's' : ''}, ` +
-            `${bookingData.children} niño${bookingData.children !== 1 ? 's' : ''}`;
-        document.getElementById('totalPaid').textContent = bookingData.totalPrice;
+        
+        // Mostrar información de huéspedes con manejo de valores indefinidos
+        const adults = bookingData.adults || 1; // Valor por defecto 1 si no está definido
+        const children = bookingData.children || 0; // Valor por defecto 0 si no está definido
+        
+        let guestsText = `${adults} ${adults === 1 ? 'adulto' : 'adultos'}`;
+        if (children > 0) {
+            guestsText += `, ${children} ${children === 1 ? 'niño' : 'niños'}`;
+        }
+        
+        document.getElementById('guestsInfo').textContent = guestsText;
+        
+        // Formatear el precio
+        if (bookingData.totalPrice) {
+            const totalPrice = parseFloat(bookingData.totalPrice);
+            document.getElementById('totalPaid').textContent = `${totalPrice.toFixed(2)} €`;
+        }
 
         // Mostrar detalles del pago si están disponibles
         if (bookingData.paymentDetails) {

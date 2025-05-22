@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setTextContentSafely('summaryCheckIn', bookingData.checkIn || 'No especificado');
     setTextContentSafely('summaryCheckOut', bookingData.checkOut || 'No especificado');
     setTextContentSafely('summaryNights', `${nights} ${nights === 1 ? 'noche' : 'noches'}`);
+    // Actualizar también el contador de noches en la sección de precios
+    setTextContentSafely('nightsCount', `${nights} ${nights === 1 ? 'noche' : 'noches'}`);
     
     // Mostrar la información de huéspedes
     setTextContentSafely('summaryAdults', `${adults} ${adults === 1 ? 'adulto' : 'adultos'}`);
@@ -194,6 +196,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!response.ok) {
                         const errorData = await response.json().catch(() => ({}));
                         console.error('Error en la respuesta del servidor:', errorData);
+                        // Redirigir a la página de pago fallido
+                        window.location.href = '/reservas/pago-fallido';
                         throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
                     }
                     
@@ -207,24 +211,33 @@ document.addEventListener('DOMContentLoaded', function() {
                         sessionStorage.setItem('bookingData', JSON.stringify(currentBookingData));
                         window.location.href = '/reservas/pago-exitoso';
                     } else {
+                        // Redirigir a la página de pago fallido si hay un error
+                        window.location.href = '/reservas/pago-fallido';
                         throw new Error(responseData.error || 'Error al guardar la reserva');
                     }
-                } catch (error) {
-                    console.error('Error al procesar la reserva:', error);
-                    mostrarError('Error al procesar la reserva: ' + (error.message || 'Error desconocido'));
-                    // No es necesario relanzar el error ya que ya lo estamos manejando
-                }
-            },
-            onError: function(err) {
-                console.error('Error en el pago:', err);
-                mostrarError('Ha ocurrido un error durante el proceso de pago. Por favor, inténtalo de nuevo.');
-                window.location.href = '/reservas/pago-fallido';
+            } catch (error) {
+                console.error('Error al procesar la reserva:', error);
+                mostrarError('Error al procesar la reserva: ' + (error.message || 'Error desconocido'));
+                // No es necesario relanzar el error ya que ya lo estamos manejando
             }
-        }).render('#paypal-button-container');
-    } catch (error) {
-        console.error('Error al configurar el botón de PayPal:', error);
-        mostrarError('Hubo un error al configurar el pago. Por favor, inténtalo de nuevo.');
-    }
+        },
+        onError: function (err) {
+            console.error('Error en el pago:', err);
+            mostrarError('Ocurrió un error al procesar el pago. Por favor, inténtalo de nuevo.');
+            // Redirigir a la página de pago fallido después de 3 segundos
+            setTimeout(() => {
+                window.location.href = '/reservas/pago-fallido';
+            }, 3000);
+        }
+    }).render('#paypal-button-container');
+} catch (error) {
+    console.error('Error al configurar el botón de PayPal:', error);
+    mostrarError('Hubo un error al configurar el pago. Por favor, inténtalo de nuevo.');
+    // Redirigir a la página de pago fallido después de 3 segundos
+    setTimeout(() => {
+        window.location.href = '/reservas/pago-fallido';
+    }, 3000);
+}
 
     function mostrarError(mensaje) {
         console.error('Error mostrado:', mensaje);

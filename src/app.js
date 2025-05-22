@@ -1,3 +1,27 @@
+/**
+ * Aplicación Principal - Heranika
+ * 
+ * Punto de entrada principal de la aplicación web. Configura y arranca el servidor Express.
+ * 
+ * Configuraciones principales:
+ * - Motor de plantillas EJS y layouts
+ * - Middlewares esenciales (sesiones, análisis de JSON, formularios, etc.)
+ * - Archivos estáticos
+ * - Conexión a la base de datos MongoDB
+ * 
+ * Estructura de rutas:
+ * - Rutas principales (index.js)
+ * - Rutas de autenticación (/auth)
+ * - Rutas de reservas (/bookings)
+ * - Rutas de contacto (/contact)
+ * - Rutas de pagos (/payment)
+ * 
+ * Variables de entorno requeridas:
+ * - PORT: Puerto del servidor
+ * - MONGODB_URI: URL de conexión a MongoDB
+ * - SESSION_SECRET: Clave secreta para las sesiones
+ */
+
 const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');

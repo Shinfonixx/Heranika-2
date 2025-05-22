@@ -1,3 +1,19 @@
+/**
+ * Modelo de Reseña (Review)
+ * 
+ * Define la estructura de datos para las reseñas de los usuarios.
+ * 
+ * Campos principales:
+ * - user: Referencia al usuario que hizo la reseña (obligatorio)
+ * - title: Título de la reseña (obligatorio)
+ * - content: Contenido de la reseña (obligatorio)
+ * - rating: Calificación del 1 al 5 (obligatorio)
+ * - createdAt / updatedAt: Fechas de creación y actualización
+ * 
+ * Relaciones:
+ * - Pertenece a un Usuario (User)
+ */
+
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({

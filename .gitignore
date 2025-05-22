@@ -39,4 +39,5 @@ sessions/
 
 # Archivos de respaldo
 *.bak
-*.backup
+*.backupsrc/public/css/contact.css
+src/public/js/payment-success.js

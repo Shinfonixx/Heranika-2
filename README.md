@@ -59,7 +59,6 @@ Desarrollar una página web funcional para la finca rural Heranika que permita g
 - Integración con PayPal para realizar transacciones seguras.
 - Opiniones de clientes visibles públicamente.
 - Área privada para gestión de reservas.
-- Panel de administración para el gestor del alojamiento.
 
 ---
 

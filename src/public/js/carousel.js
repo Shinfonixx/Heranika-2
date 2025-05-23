@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Función para actualizar la imagen principal
+        // Función para actualizar la imagen principal
     function updateMainImage(index) {
         const selectedThumb = thumbs[index];
         const img = selectedThumb.querySelector('img');

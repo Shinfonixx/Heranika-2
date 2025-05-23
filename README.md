@@ -71,14 +71,12 @@ Desarrollar una página web funcional para la finca rural Heranika que permita g
 
 ### Backend
 - Node.js
-- Express.js
 
 ### Base de Datos
 - MongoDB (MongoDB Atlas)
 
 ### Otros
 - PayPal API
-- Dotenv (para gestión de variables de entorno)
 - Git & GitHub (control de versiones)
 
 ---

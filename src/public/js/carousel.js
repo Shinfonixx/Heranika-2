@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedThumb = thumbs[index];
         const img = selectedThumb.querySelector('img');
         const src = img.src;
-        const alt = img.alt || 'Imagen de la galería';
+        const alt = img.alt || '';
 
         // Actualizar la imagen principal
         mainImage.src = src;

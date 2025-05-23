@@ -1,3 +1,22 @@
+/**
+ * Modelo de Usuario (User)
+ * 
+ * Define la estructura de datos para los usuarios de la aplicación.
+ * 
+ * Campos principales:
+ * - name: Nombre del usuario (obligatorio)
+ * - email: Correo electrónico (único, obligatorio)
+ * - password: Contraseña hasheada (obligatorio)
+ * - createdAt / updatedAt: Marcas de tiempo automáticas
+ * 
+ * Funcionalidades:
+ * - Hasheo automático de contraseñas antes de guardar
+ * - Método para validar contraseñas
+ * 
+ * Relaciones:
+ * - Tiene muchas Reservas (Bookings)
+ */
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 

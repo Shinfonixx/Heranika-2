@@ -15,22 +15,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para actualizar la imagen principal
     function updateMainImage(index) {
         const selectedThumb = thumbs[index];
-        const src = selectedThumb.querySelector('img').src;
-        const alt = selectedThumb.querySelector('img').alt;
-        const description = selectedThumb.querySelector('span.sr-only').textContent;
+        const img = selectedThumb.querySelector('img');
+        const src = img.src;
+        const alt = img.alt || 'Imagen de la galería';
 
         // Actualizar la imagen principal
         mainImage.src = src;
         mainImage.alt = alt;
         mainImage.classList.add('active');
 
-        // Actualizar el overlay
+        // Actualizar el overlay (si existe)
         const overlay = mainImage.nextElementSibling;
-        if (overlay) {
-            const [category, descriptionText] = description.split(' - ');
+        if (overlay && overlay.classList.contains('carousel-overlay')) {
             overlay.innerHTML = `
-                <h3>${category}</h3>
-                <p>${descriptionText}</p>
+                <h3>${alt}</h3>
             `;
         }
 

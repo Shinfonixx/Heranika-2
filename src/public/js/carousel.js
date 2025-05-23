@@ -16,21 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateMainImage(index) {
         const selectedThumb = thumbs[index];
         const img = selectedThumb.querySelector('img');
-        const src = img.src;
-        const alt = img.alt || '';
-
+        
         // Actualizar la imagen principal
-        mainImage.src = src;
-        mainImage.alt = alt;
+        mainImage.src = img.src;
         mainImage.classList.add('active');
-
-        // Actualizar el overlay (si existe)
-        const overlay = mainImage.nextElementSibling;
-        if (overlay && overlay.classList.contains('carousel-overlay')) {
-            overlay.innerHTML = `
-                <h3>${alt}</h3>
-            `;
-        }
 
         // Actualizar el estado de las miniaturas
         thumbs.forEach((thumb, i) => {
